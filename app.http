@@ -1,0 +1,122 @@
+/* 
+Sample Valid User Credentials
+{
+  "username": "christopher_phillips",
+  "password": "christy@123"
+}
+
+*/                          
+                            
+                            
+                            
+                            //LogIn
+
+//Scenario 1 - If an unregistered user tries to login
+
+POST http://localhost:3000/login/
+Content-Type: application/json
+
+{
+  "username": "christopher",
+  "password": "christy@123"
+}
+
+###
+
+//Scenario 2 - If the user provides an incorrect password
+
+POST http://localhost:3000/login/
+Content-Type: application/json
+
+{
+  "username": "christopher_phillips",
+  "password": "christy"
+}
+
+###
+
+//Scenario 3 - Successful login of the user
+
+POST http://localhost:3000/login/
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+{
+  "username": "christopher_phillips",
+  "password": "christy@123"
+}
+
+###
+
+//Authentication with Token
+
+//Scenario 1 - If the token is not provided by the user or an invalid token
+GET http://localhost:3000/states/
+Authorization: bearer JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+//Scenerio 2 with API 2 -  After successful verification of token proceed to next middleware or handler
+
+GET http://localhost:3000/states/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+###
+
+//API 3 - Returns a state based on the state ID
+GET http://localhost:3000/states/4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+###
+
+//API 4 - Create a district in the district table, district_id is auto-incremented.
+
+POST http://localhost:3000/districts/
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+{
+  "districtName": "Bagalkot",
+  "stateId": 3,
+  "cases": 2323,
+  "cured": 2000,
+  "active": 315,
+  "deaths": 8
+}
+
+###
+
+//API 5 - Returns a district based on the district ID
+
+GET http://localhost:3000/districts/322
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+###
+
+//API 6 - Deletes a district from the district table based on the district ID
+
+DELETE http://localhost:3000/districts/310
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+###
+
+//API 7 - Updates the details of a specific district based on the district ID
+
+PUT http://localhost:3000/districts/7
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+{
+  "districtName": "Nadia",
+  "stateId": 3,
+  "cases": 9628,
+  "cured": 6524,
+  "active": 3000,
+  "deaths": 104
+}
+
+###
+
+//API 8 - Returns the statistics of total cases, cured, active, deaths of a specific state based on state ID
+GET http://localhost:3000/states/2/stats
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNzMxMzg3ODUxfQ.c8MxZFJ4azjalvuldy1bDvbRfqaBlyrKqmyz98q06pE
+
+###
